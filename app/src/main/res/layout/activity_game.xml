@@ -2,42 +2,44 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#10c6d3"
+    android:background="#e08114"
+    android:gravity="center"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
+    <ImageButton
+        android:id="@+id/green_button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Scooble"
-        android:paddingTop="150dp"
-        android:gravity="center"
-        android:textColor="#e58a22"
-        android:textSize="50sp" />
+        android:layout_gravity="center"
+        android:background="@null"
+        android:src="@drawable/button1" />
 
-    <Button
-        android:id="@+id/play_button"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#e08114"
-        android:text="@string/play"
-        android:layout_marginBottom="10dp"
-        android:textSize="30sp" />
+        android:layout_gravity="center"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/highscore_button"
-        android:layout_width="match_parent"
+        <ImageButton
+            android:id="@+id/red_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:src="@drawable/button2" />
+
+        <ImageButton
+            android:id="@+id/yellow_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:src="@drawable/button3" />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/blue_button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#e08114"
-        android:layout_marginBottom="10dp"
-        android:text="Highscores"
-        android:textSize="30sp" />
-
-    <Button
-        android:id="@+id/about_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="About"
-        android:textColor="#e08114"
-        android:textSize="30sp" />
-
+        android:background="@null"
+        android:layout_gravity="center"
+        android:src="@drawable/button4" />
 </LinearLayout>

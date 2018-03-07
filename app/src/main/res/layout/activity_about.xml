@@ -69,6 +69,20 @@
         android:textColor="#e58a22"
         android:textSize="15sp" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="                    http://all-free-download.com/free-vector/download/gold-and-silver-trophy-vector_289182.html"
+        android:textColor="#e58a22"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="                    https://commons.wikimedia.org/wiki/File:OriginalSimon.jpg"
+        android:textColor="#e58a22"
+        android:textSize="15sp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
