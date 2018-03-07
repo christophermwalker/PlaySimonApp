@@ -8,10 +8,12 @@ import android.widget.Button;
 
 public class GameActivity extends Activity implements View.OnClickListener {
 
+    public static final String SCORE_KEY = "score";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start);
+        setContentView(R.layout.activity_game);
 
         int ids[]={R.id.play_button, R.id.highscore_button, R.id.about_button};
         for (int id : ids) {
@@ -22,23 +24,23 @@ public class GameActivity extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.play_button) {
-            Intent intent=new Intent(
-                    getApplicationContext(),
-                    GameActivity.class);
+            String etStaticString = "0";
+            Intent intent = new Intent(getApplicationContext(), HighscoreActivity.class);
+            intent.putExtra(SCORE_KEY, etStaticString);
             startActivity(intent);
         }
 
         if (view.getId() == R.id.highscore_button) {
-            Intent intent=new Intent(
-                    getApplicationContext(),
-                    HighscoreActivity.class);
+            String etStaticString = "85";
+            Intent intent = new Intent(getApplicationContext(), HighscoreActivity.class);
+            intent.putExtra(SCORE_KEY, etStaticString);
             startActivity(intent);
         }
 
         if (view.getId() == R.id.about_button) {
-            Intent intent=new Intent(
-                    getApplicationContext(),
-                    AboutActivity.class);
+            String etStaticString = "102";
+            Intent intent = new Intent(getApplicationContext(), HighscoreActivity.class);
+            intent.putExtra(SCORE_KEY, etStaticString);
             startActivity(intent);
         }
     }
