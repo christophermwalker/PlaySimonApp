@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:text="             Christopher Walker and Brody Taylor"
         android:textColor="#e58a22"
-        android:textSize="19sp" />
+        android:textSize="16.3sp" />
 
     <TextView
         android:layout_width="match_parent"
@@ -30,9 +30,44 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="                    http://soundbible.com/1501-Buzzer.html"
+        android:text="                    http://soundbible.com/1501-Buzzer.html "
         android:textColor="#e58a22"
-        android:textSize="20sp" />
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="                    http://soundbible.com/1672-Button-Press.html"
+        android:textColor="#e58a22"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="                    http://soundbible.com/1689-Button-Press-3.html"
+        android:textColor="#e58a22"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="                    http://soundbible.com/1681-Button-Press-4.html"
+        android:textColor="#e58a22"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="                    http://soundbible.com/1677-Button-Press-5.html"
+        android:textColor="#e58a22"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="                    https://openclipart.org/detail/78301/round-buttons-1"
+        android:textColor="#e58a22"
+        android:textSize="15sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
