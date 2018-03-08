@@ -45,7 +45,14 @@ public class HighscoreActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_highscore);
         Intent intent = getIntent();
-        String score = intent.getStringExtra(GameActivity.SCORE_KEY);
+        String score = "0";
+        if (intent.getStringExtra(Game1Activity.SCORE_KEY) != null) {
+            score = intent.getStringExtra(Game1Activity.SCORE_KEY);
+        } else if (intent.getStringExtra(Game2Activity.SCORE_KEY) != null) {
+            score = intent.getStringExtra(Game2Activity.SCORE_KEY);
+        } else if (intent.getStringExtra(Game3Activity.SCORE_KEY) != null) {
+            score = intent.getStringExtra(Game3Activity.SCORE_KEY);
+        }
         Score[] SCORES = {
                 new Score("!YOU",score),
                 new Score("TECA","100"),

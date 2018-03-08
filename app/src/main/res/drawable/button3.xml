@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true"
-        android:drawable="@drawable/real_bright_yellow_button" /> <!-- pressed -->
+        android:drawable="@drawable/bright_yellow_button" />
     <item android:state_focused="true"
-        android:drawable="@drawable/real_bright_yellow_button" /> <!-- focused -->
-    <item android:drawable="@drawable/real_yellow_button" /> <!-- default -->
+        android:drawable="@drawable/bright_yellow_button" />
+    <item android:drawable="@drawable/dark_yellow_button" />
 </selector>

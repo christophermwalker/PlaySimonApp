@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#10c6d3"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select a Game Mode"
+        android:gravity="center"
+        android:textColor="#e58a22"
+        android:textSize="50sp" />
+
+    <Button
+        android:id="@+id/game1_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#e08114"
+        android:text="Game A"
+        android:layout_marginBottom="10dp"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/game2_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#e08114"
+        android:layout_marginBottom="10dp"
+        android:text="Game B"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/game3_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Game C"
+        android:textColor="#e08114"
+        android:textSize="30sp" />
+
+</LinearLayout>
