@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#10c6d3"
+    android:background="#e08114"
     android:orientation="vertical">
 
     <TextView
@@ -11,14 +11,14 @@
         android:text="@string/title"
         android:paddingTop="150dp"
         android:gravity="center"
-        android:textColor="#e58a22"
+        android:textColor="#42e2f4"
         android:textSize="50sp" />
 
     <Button
         android:id="@+id/play_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#e08114"
+        android:textColor="#42e2f4"
         android:text="@string/play"
         android:layout_marginBottom="10dp"
         android:textSize="30sp" />
@@ -27,7 +27,7 @@
         android:id="@+id/highscore_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#e08114"
+        android:textColor="#42e2f4"
         android:layout_marginBottom="10dp"
         android:text="Highscores"
         android:textSize="30sp" />
@@ -37,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="About"
-        android:textColor="#e08114"
+        android:textColor="#42e2f4"
         android:textSize="30sp" />
 
 </LinearLayout>

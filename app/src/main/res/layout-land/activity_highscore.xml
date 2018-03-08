@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#10c6d3">
+    android:background="#e08114">
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#e58a22"
+        android:textColor="#42e2f4"
         android:typeface="serif"
         android:text="@string/high_score"
         android:gravity="center"
@@ -34,7 +34,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="1."
-                android:textColor="#ec5d10"
+                android:textColor="#30e0f4"
                 android:textSize="12sp" />
 
             <TextView
@@ -43,7 +43,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="2."
-                android:textColor="#ec5d10"
+                android:textColor="#30e0f4"
                 android:textSize="12sp" />
 
             <TextView
@@ -52,7 +52,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="3."
-                android:textColor="#ec5d10"
+                android:textColor="#30e0f4"
                 android:textSize="12sp" />
 
             <TextView
@@ -61,7 +61,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="4."
-                android:textColor="#ec5d10"
+                android:textColor="#30e0f4"
                 android:textSize="12sp" />
 
             <TextView
@@ -70,7 +70,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="5."
-                android:textColor="#ec5d10"
+                android:textColor="#30e0f4"
                 android:textSize="12sp" />
 
             <TextView
@@ -79,7 +79,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="6."
-                android:textColor="#ec5d10"
+                android:textColor="#30e0f4"
                 android:textSize="12sp" />
 
             <TextView
@@ -88,7 +88,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="7."
-                android:textColor="#ec5d10"
+                android:textColor="#30e0f4"
                 android:textSize="12sp" />
 
             <TextView
@@ -97,7 +97,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="8."
-                android:textColor="#ec5d10"
+                android:textColor="#30e0f4"
                 android:textSize="12sp" />
 
             <TextView
@@ -106,7 +106,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="9."
-                android:textColor="#ec5d10"
+                android:textColor="#30e0f4"
                 android:textSize="12sp" />
 
             <TextView
@@ -115,7 +115,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="10."
-                android:textColor="#ec5d10"
+                android:textColor="#30e0f4"
                 android:textSize="12sp" />
         </LinearLayout>
 
@@ -197,7 +197,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TECA"
-                android:textColor="#ec5d10"
+                android:textColor="#30e0f4"
                 android:textSize="12sp" />
 
             <TextView
@@ -205,7 +205,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="ESNB"
-                android:textColor="#ec5d10"
+                android:textColor="#30e0f4"
                 android:textSize="12sp" />
 
             <TextView
@@ -213,7 +213,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="OCTD"
-                android:textColor="#ec5d10"
+                android:textColor="#30e0f4"
                 android:textSize="12sp" />
 
             <TextView
@@ -221,7 +221,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="EMAC"
-                android:textColor="#ec5d10"
+                android:textColor="#30e0f4"
                 android:textSize="12sp" />
 
             <TextView
@@ -229,7 +229,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TISE"
-                android:textColor="#ec5d10"
+                android:textColor="#30e0f4"
                 android:textSize="12sp" />
 
             <TextView
@@ -237,7 +237,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="ROLF"
-                android:textColor="#ec5d10"
+                android:textColor="#30e0f4"
                 android:textSize="12sp" />
 
             <TextView
@@ -245,7 +245,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="ODMI"
-                android:textColor="#ec5d10"
+                android:textColor="#30e0f4"
                 android:textSize="12sp" />
 
             <TextView
@@ -253,7 +253,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="USPH"
-                android:textColor="#ec5d10"
+                android:textColor="#30e0f4"
                 android:textSize="12sp" />
 
             <TextView
@@ -261,7 +261,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="IMEI"
-                android:textColor="#ec5d10"
+                android:textColor="#30e0f4"
                 android:textSize="12sp" />
 
             <TextView
@@ -269,7 +269,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="ROLJ"
-                android:textColor="#ec5d10"
+                android:textColor="#30e0f4"
                 android:textSize="12sp" />
         </LinearLayout>
 
@@ -284,7 +284,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="100"
-                android:textColor="#ec5d10"
+                android:textColor="#30e0f4"
                 android:textSize="12sp" />
 
             <TextView
@@ -292,7 +292,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="96"
-                android:textColor="#ec5d10"
+                android:textColor="#30e0f4"
                 android:textSize="12sp" />
 
             <TextView
@@ -300,7 +300,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="92"
-                android:textColor="#ec5d10"
+                android:textColor="#30e0f4"
                 android:textSize="12sp" />
 
             <TextView
@@ -308,7 +308,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="88"
-                android:textColor="#ec5d10"
+                android:textColor="#30e0f4"
                 android:textSize="12sp" />
 
             <TextView
@@ -316,7 +316,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="83"
-                android:textColor="#ec5d10"
+                android:textColor="#30e0f4"
                 android:textSize="12sp" />
 
             <TextView
@@ -324,7 +324,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="71"
-                android:textColor="#ec5d10"
+                android:textColor="#30e0f4"
                 android:textSize="12sp" />
 
             <TextView
@@ -332,7 +332,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="70"
-                android:textColor="#ec5d10"
+                android:textColor="#30e0f4"
                 android:textSize="12sp" />
 
             <TextView
@@ -340,7 +340,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="66"
-                android:textColor="#ec5d10"
+                android:textColor="#30e0f4"
                 android:textSize="12sp" />
 
             <TextView
@@ -348,7 +348,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="50"
-                android:textColor="#ec5d10"
+                android:textColor="#30e0f4"
                 android:textSize="12sp" />
 
             <TextView
@@ -356,7 +356,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="31"
-                android:textColor="#ec5d10"
+                android:textColor="#30e0f4"
                 android:textSize="12sp" />
         </LinearLayout>
 
@@ -368,6 +368,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Return to Start Screen"
-        android:textColor="#bc4403" />
+        android:textColor="#e51c19" />
 
 </LinearLayout>

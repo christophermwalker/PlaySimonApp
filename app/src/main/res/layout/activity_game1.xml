@@ -56,6 +56,7 @@
         android:id="@+id/begin_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Begin"
         android:textColor="#e51c19"
-        android:text="Begin" />
+        android:textSize="24sp" />
 </LinearLayout>
