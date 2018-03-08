@@ -31,9 +31,9 @@ public class StartActivity extends Activity implements View.OnClickListener {
         }
 
         if (view.getId() == R.id.highscore_button) {
-            String etStaticString = "0";
+            String finalScore = "0";
             Intent intent = new Intent(getApplicationContext(), HighscoreActivity.class);
-            intent.putExtra(SCORE_KEY,etStaticString);
+            intent.putExtra(SCORE_KEY, finalScore);
             startActivity(intent);
         }
 
