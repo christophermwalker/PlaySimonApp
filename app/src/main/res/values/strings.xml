@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">PlaySimonApp</string>
+    <string name="title">Simon</string>
+    <string name="play">Play Now!</string>
+    <string name="pick">Pick A Card</string>
+    <string name="high_score">High Scores</string>
+    <string name="finish">Finish</string>
+    <string name="total_card">Total Card Value (Must be \u003c\u003d 21)</string>
+</resources>
