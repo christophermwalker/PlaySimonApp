@@ -26,7 +26,7 @@ public class StartActivity extends Activity implements View.OnClickListener {
         if (view.getId() == R.id.play_button) {
             Intent intent = new Intent(
                     getApplicationContext(),
-                    GameSelectionActivity.class);
+                    Game2Activity.class);
             startActivity(intent);
         }
 

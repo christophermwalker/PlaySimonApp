@@ -50,8 +50,6 @@ public class HighscoreActivity extends Activity {
             score = intent.getStringExtra(Game1Activity.SCORE_KEY);
         } else if (intent.getStringExtra(Game2Activity.SCORE_KEY) != null) {
             score = intent.getStringExtra(Game2Activity.SCORE_KEY);
-        } else if (intent.getStringExtra(Game3Activity.SCORE_KEY) != null) {
-            score = intent.getStringExtra(Game3Activity.SCORE_KEY);
         }
         Score[] SCORES = {
                 new Score("!YOU",score),

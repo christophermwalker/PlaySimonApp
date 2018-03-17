@@ -86,6 +86,13 @@
             android:text="              https://commons.wikimedia.org/wiki/File:OriginalSimon.jpg"
             android:textColor="#42e2f4"
             android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="              http://soundbible.com/1589-Computer-Start-Up.html"
+            android:textColor="#42e2f4"
+            android:textSize="12sp" />
     </LinearLayout>
 
     <LinearLayout

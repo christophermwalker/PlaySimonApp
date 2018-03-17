@@ -4,548 +4,94 @@ import android.app.Activity;
 import android.content.Intent;
 import android.media.AudioAttributes;
 import android.media.SoundPool;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
-import java.text.SimpleDateFormat;
-import java.time.Clock;
-import java.util.Date;
+import java.lang.annotation.Annotation;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+import static java.util.function.Predicate.isEqual;
+
 
 public class Game2Activity extends Activity implements View.OnClickListener {
-
     public static final String SCORE_KEY = "score";
-    int counter = 0;
-    int buttonCounter = 0;
-    int oldButton = 0;
-    int[] gameMemory;
-    /*private SoundPool soundPool;
-    private Set<Integer> soundsLoaded; */
+
+    private int delay = 1000;
+    private SoundPool soundPool;
+    private Set<Integer> soundsLoaded;
+    private int rId = 0;
+    private int yId = 0;
+    private int gId = 0;
+    private int bId = 0;
+    private int lId = 0;
+    private int wId = 0;
+    private int mode = 1;
+    private int position = 0;
+    private int maxPosition = 0;
+    private int maxSeq = 10;
+    private String[] compSeq = new String[maxSeq];
+    //private String[] playerSeq=new String[maxSeq];
+    private RadioGroup radioGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game2);
+        soundsLoaded = new HashSet<Integer>();
+        disableButtons();
+        int ids[]={R.id.red_button, R.id.yellow_button, R.id.green_button, R.id.blue_button};
 
-        Integer[] images = {
-                R.drawable.dark_green_button, R.drawable.dark_red_button,
-                R.drawable.dark_yellow_button, R.drawable.dark_blue_button,
-                R.drawable.bright_green_button, R.drawable.bright_red_button,
-                R.drawable.bright_yellow_button, R.drawable.bright_blue_button
-        };
-
-        Integer[] imageButtons = {
-                R.id.green_button, R.id.red_button,
-                R.id.yellow_button, R.id.blue_button
-        };
-
-        Random r = new Random();
-
-        ImageButton ib = (ImageButton) findViewById(R.id.green_button);
-        ImageButton ib2 = (ImageButton) findViewById(R.id.red_button);
-        ImageButton ib3 = (ImageButton) findViewById(R.id.yellow_button);
-        ImageButton ib4 = (ImageButton) findViewById(R.id.blue_button);
-        Button b = (Button) findViewById(R.id.begin_button);
-        TextView tv = (TextView) findViewById(R.id.ready_textview);
-
-        ib.setOnClickListener(this);
-        ib2.setOnClickListener(this);
-        ib3.setOnClickListener(this);
-        ib4.setOnClickListener(this);
-        b.setOnClickListener(this);
-
-        // soundsLoaded = new HashSet<Integer>();
-
-       /* int ids[]={R.id.green_button, R.id.red_button, R.id.yellow_button, R.id.blue_button};
         for (int id : ids) {
-            ImageButton ib =(ImageButton) findViewById(id);
+            ImageButton ib = (ImageButton) findViewById(id);
             ib.setOnClickListener(this);
-        } */
+
+            Button b = (Button) findViewById(R.id.begin_button);
+            b.setOnClickListener(this);
+
+            Button b2 = (Button) findViewById(R.id.submit_button);
+            b2.setOnClickListener(this);
+
+            radioGroup=(RadioGroup) findViewById(R.id.game_buttons);
+            radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    if (checkedId == R.id.game1_button) {
+                        mode = 1;
+                        Toast.makeText(getApplicationContext(), "choice: One Player",
+                                Toast.LENGTH_SHORT).show();
+                    } else if (checkedId == R.id.game2_button) {
+                        mode = 2;
+                        Toast.makeText(getApplicationContext(), "choice: Two Player",
+                                Toast.LENGTH_SHORT).show();
+                    } else if (checkedId == R.id.game3_button) {
+                        mode = 3;
+                        Toast.makeText(getApplicationContext(), "choice: Music",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
     }
+
+   // @RequiresApi(api=Build.VERSION_CODES.LOLLIPOP)
     @Override
-    public void onClick(final View view) {
-
-        TextView tv = (TextView) findViewById(R.id.ready_textview);
-
-        Integer[] images = {
-                R.drawable.dark_green_button, R.drawable.dark_red_button,
-                R.drawable.dark_yellow_button, R.drawable.dark_blue_button,
-                R.drawable.bright_green_button, R.drawable.bright_red_button,
-                R.drawable.bright_yellow_button, R.drawable.bright_blue_button
-        };
-
-        final ImageButton ib = (ImageButton) findViewById(R.id.green_button);
-        final ImageButton ib2 = (ImageButton) findViewById(R.id.red_button);
-        final ImageButton ib3 = (ImageButton) findViewById(R.id.yellow_button);
-        final ImageButton ib4 = (ImageButton) findViewById(R.id.blue_button);
-        Button b = (Button) findViewById(R.id.begin_button);
-
-        Integer[] imageButtons = {
-                R.id.green_button, R.id.red_button,
-                R.id.yellow_button, R.id.blue_button
-        };
-
-        Random r = new Random();
-
-        if (view.getId() == R.id.begin_button) {
-            view.setVisibility(View.GONE);
-            tv.setVisibility(View.GONE);
-        }
-
-        // gameMemory[0] = 0;
-
-        //gameMemory[0] != R.id.green_button || gameMemory[0] != R.id.red_button ||
-        //gameMemory[0] != R.id.yellow_button || gameMemory[0] != R.id.blue_button
-
-        //if (gameMemory[0] == 0) {
-        if (buttonCounter == 0) {
-            view.setId(imageButtons[r.nextInt(imageButtons.length) % imageButtons.length]);
-            if (view.getId() == R.id.green_button) {
-                //  gameMemory[buttonCounter] = view.getId();
-                ib.setImageResource(R.drawable.bright_green_button);
-                (new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-
-                        }
-                        view.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                ib.setImageResource(R.drawable.dark_green_button);
-                            }
-                        });
-                    }
-                })
-                ).start();
-            } else if (view.getId() == R.id.red_button) {
-                //   gameMemory[buttonCounter] = view.getId();
-                ib2.setImageResource(R.drawable.bright_red_button);
-                (new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-
-                        }
-                        view.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                ib2.setImageResource(R.drawable.dark_red_button);
-                            }
-                        });
-                    }
-                })
-                ).start();
-            } else if (view.getId() == R.id.yellow_button) {
-                //   gameMemory[buttonCounter] = view.getId();
-                ib3.setImageResource(R.drawable.bright_yellow_button);
-                (new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-
-                        }
-                        view.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                ib3.setImageResource(R.drawable.dark_yellow_button);
-                            }
-                        });
-                    }
-                })
-                ).start();
-            } else if (view.getId() == R.id.blue_button) {
-                //   gameMemory[buttonCounter] = view.getId();
-                ib4.setImageResource(R.drawable.bright_blue_button);
-                (new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-
-                        }
-                        view.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                ib4.setImageResource(R.drawable.dark_blue_button);
-                            }
-                        });
-                    }
-                })
-                ).start();
-            }
-            //Log.i("OLD", "The Button: " + oldButton);
-            //Log.i("New", "New Button: " + oldButton);
-            oldButton = view.getId();
-            Log.i("BVALUE", "Button: " + oldButton);
-            buttonCounter++;
-        }
-
-        if (ib.isPressed()) {
-            view.setId(R.id.green_button);
-            buttonCounter++;
-
-            ib.setImageResource(R.drawable.bright_green_button);
-            (new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Thread.sleep(30);
-                    } catch (InterruptedException e) {
-
-                    }
-                    view.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ib.setImageResource(R.drawable.dark_green_button);
-                        }
-                    });
-                }
-            })
-            ).start();
-        } else if (ib2.isPressed()) {
-            view.setId(R.id.red_button);
-            buttonCounter++;
-
-            ib2.setImageResource(R.drawable.bright_red_button);
-            (new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Thread.sleep(30);
-                    } catch (InterruptedException e) {
-
-                    }
-                    view.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ib2.setImageResource(R.drawable.dark_red_button);
-                        }
-                    });
-                }
-            })
-            ).start();
-        } else if (ib3.isPressed()) {
-            view.setId(R.id.yellow_button);
-            buttonCounter++;
-
-            ib3.setImageResource(R.drawable.bright_yellow_button);
-            (new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Thread.sleep(30);
-                    } catch (InterruptedException e) {
-
-                    }
-                    view.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ib3.setImageResource(R.drawable.dark_yellow_button);
-                        }
-                    });
-                }
-            })
-            ).start();
-        } else if (ib4.isPressed()) {
-            view.setId(R.id.blue_button);
-            buttonCounter++;
-
-            ib4.setImageResource(R.drawable.bright_blue_button);
-            (new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Thread.sleep(30);
-                    } catch (InterruptedException e) {
-
-                    }
-                    view.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ib4.setImageResource(R.drawable.dark_blue_button);
-                        }
-                    });
-                }
-            })
-            ).start();
-        }
-
-        if (buttonCounter == 2) {
-            if (view.getId() != oldButton) {
-                String finalScore = "0";
-                Intent intent = new Intent(getApplicationContext(), HighscoreActivity.class);
-                intent.putExtra(SCORE_KEY, finalScore);
-                startActivity(intent);
-            } else if (view.getId() == oldButton) {
-                String finalScore = "100";
-                Intent intent = new Intent(getApplicationContext(), HighscoreActivity.class);
-                intent.putExtra(SCORE_KEY, finalScore);
-                startActivity(intent);
-            }
-        }
-       /* } else {
-            for (int counting = 0; counting <= gameMemory.length; counting++) {
-                if (gameMemory[counting] == R.id.green_button) {
-                    ib.setImageResource(R.drawable.bright_green_button);
-                    (new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException e) {
-
-                            }
-                            view.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    ib.setImageResource(R.drawable.dark_green_button);
-                                }
-                            });
-                        }
-                    })
-                    ).start();
-                } else if (gameMemory[0] == R.id.red_button) {
-                    ib2.setImageResource(R.drawable.bright_red_button);
-                    (new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException e) {
-
-                            }
-                            view.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    ib2.setImageResource(R.drawable.dark_red_button);
-                                }
-                            });
-                        }
-                    })
-                    ).start();
-                } else if (gameMemory[0] == R.id.yellow_button) {
-                    ib3.setImageResource(R.drawable.bright_yellow_button);
-                    (new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException e) {
-
-                            }
-                            view.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    ib3.setImageResource(R.drawable.dark_yellow_button);
-                                }
-                            });
-                        }
-                    })
-                    ).start();
-                } else if (gameMemory[0] == R.id.blue_button) {
-                    ib4.setImageResource(R.drawable.bright_blue_button);
-                    (new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException e) {
-
-                            }
-                            view.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    ib4.setImageResource(R.drawable.dark_blue_button);
-                                }
-                            });
-                        }
-                    })
-                    ).start();
-                }
-                oldButton = view.getId();
-                Log.i("BVALUE", "Button: " + oldButton);
-                buttonCounter++;
-
-                for (int count = 0; count < 1; count++) {
-                    if (ib.isPressed()) {
-                        view.setId(R.id.green_button);
-                        buttonCounter++;
-                    } else if (ib2.isPressed()) {
-                        view.setId(R.id.red_button);
-                        buttonCounter++;
-                    } else if (ib3.isPressed()) {
-                        view.setId(R.id.yellow_button);
-                        buttonCounter++;
-                    } else if (ib4.isPressed()) {
-                        view.setId(R.id.blue_button);
-                        buttonCounter++;
-                    }
-                }
-
-                if (view.getId() != oldButton) {
-                    String etStaticString = "0";
-                    Intent intent = new Intent(getApplicationContext(), HighscoreActivity.class);
-                    intent.putExtra(SCORE_KEY, etStaticString);
-                    startActivity(intent);
-                } else if (view.getId() == oldButton) {
-                    Log.i("SUCCESS", "IT WORKED!");
-                } else {
-                    Log.i("KINDA", "MAYBE IT WORKED!?!?");
-                }
-            }
-            if (view.getId() == R.id.green_button) {
-                gameMemory[buttonCounter] += view.getId();
-                ib.setImageResource(R.drawable.bright_green_button);
-                (new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-
-                        }
-                        view.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                ib.setImageResource(R.drawable.dark_green_button);
-                            }
-                        });
-                    }
-                })
-                ).start();
-            } else if (view.getId() == R.id.red_button) {
-                gameMemory[buttonCounter] += view.getId();
-                ib2.setImageResource(R.drawable.bright_red_button);
-                (new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-
-                        }
-                        view.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                ib2.setImageResource(R.drawable.dark_red_button);
-                            }
-                        });
-                    }
-                })
-                ).start();
-            } else if (view.getId() == R.id.yellow_button) {
-                gameMemory[buttonCounter] += view.getId();
-                ib3.setImageResource(R.drawable.bright_yellow_button);
-                (new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-
-                        }
-                        view.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                ib3.setImageResource(R.drawable.dark_yellow_button);
-                            }
-                        });
-                    }
-                })
-                ).start();
-            } else if (view.getId() == R.id.blue_button) {
-                gameMemory[buttonCounter] += view.getId();
-                ib4.setImageResource(R.drawable.bright_blue_button);
-                (new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-
-                        }
-                        view.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                ib4.setImageResource(R.drawable.dark_blue_button);
-                            }
-                        });
-                    }
-                })
-                ).start();
-            }
-            oldButton = view.getId();
-            Log.i("BVALUE", "Button: " + oldButton);
-            buttonCounter++;
-
-            for (int count = 0; count < 1; count++) {
-                if (ib.isPressed()) {
-                    view.setId(R.id.green_button);
-                    buttonCounter++;
-                } else if (ib2.isPressed()) {
-                    view.setId(R.id.red_button);
-                    buttonCounter++;
-                } else if (ib3.isPressed()) {
-                    view.setId(R.id.yellow_button);
-                    buttonCounter++;
-                } else if (ib4.isPressed()) {
-                    view.setId(R.id.blue_button);
-                    buttonCounter++;
-                }
-            }
-
-            if (view.getId() != oldButton) {
-                String etStaticString = "0";
-                Intent intent = new Intent(getApplicationContext(), HighscoreActivity.class);
-                intent.putExtra(SCORE_KEY, etStaticString);
-                startActivity(intent);
-            } else if (view.getId() == oldButton) {
-                Log.i("SUCCESS", "IT WORKED!");
-            } else {
-                Log.i("KINDA", "MAYBE IT WORKED!?!?");
-            }
-        } */
-
-   /* ib.setEnabled(false);
-    ib2.setEnabled(false);
-    ib3.setEnabled(false);
-    ib4.setEnabled(false);
-    ib.setEnabled(true);
-    ib2.setEnabled(true);
-    ib3.setEnabled(true);
-    ib4.setEnabled(true); */
-    }
-
-    public static boolean getRandomBoolean() {
-        return Math.random() < 0.5;
-    }
-
-    private int getDrawableId(ImageButton ib) {
-        return ((Integer) ib.getTag() - 2130903039);
-    }
-
-   /* Sounds for API 21
-   @Override
     protected void onResume() {
         super.onResume();
 
@@ -554,7 +100,7 @@ public class Game2Activity extends Activity implements View.OnClickListener {
 
         SoundPool.Builder spBuilder = new SoundPool.Builder();
         spBuilder.setAudioAttributes(attrBuilder.build());
-        spBuilder.setMaxStreams(2);
+        spBuilder.setMaxStreams(4);
         soundPool = spBuilder.build();
 
         soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
@@ -568,38 +114,142 @@ public class Game2Activity extends Activity implements View.OnClickListener {
                 }
             }
         });
+        rId = soundPool.load(this, R.raw.button1, 1);
+        yId = soundPool.load(this, R.raw.button2, 1);
+        gId = soundPool.load(this, R.raw.button3, 1);
+        bId = soundPool.load(this, R.raw.button4, 1);
+        lId = soundPool.load(this, R.raw.buzzer, 1);
+        wId = soundPool.load(this, R.raw.victory, 1);
+    }
 
-        final int greenButtonId = soundPool.load(this, R.raw.button1, 1);
-        findViewById(R.id.green_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                playSound(greenButtonId);
-            }
-        });
 
-        final int redButtonId = soundPool.load(this, R.raw.button2, 1);
-        findViewById(R.id.red_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                playSound(redButtonId);
-            }
-        });
+    public void onSelect(String x, final View view) throws InterruptedException {
+        final ImageButton ibR = (ImageButton) findViewById(R.id.red_button);
+        final ImageButton ibY = (ImageButton) findViewById(R.id.yellow_button);
+        final ImageButton ibG = (ImageButton) findViewById(R.id.green_button);
+        final ImageButton ibB = (ImageButton) findViewById(R.id.blue_button);
+        if (x.equals("R")) {
+            playSound(rId);
+            (new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
 
-        final int yellowButtonId = soundPool.load(this, R.raw.button3, 1);
-        findViewById(R.id.yellow_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                playSound(yellowButtonId);
-            }
-        });
+                    }
+                    view.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            ibR.setImageResource(R.drawable.bright_red_button);
+                        }
+                    });
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
 
-        final int blueButtonId = soundPool.load(this, R.raw.button4, 1);
-        findViewById(R.id.blue_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                playSound(blueButtonId);
-            }
-        });
+                    }
+                    view.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            ibR.setImageResource(R.drawable.dark_red_button);
+                        }
+                    });
+                }
+            })
+            ).start();
+        } else if (x.equals("Y")) {
+            playSound(yId);
+            (new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+
+                    }
+                    view.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            ibY.setImageResource(R.drawable.bright_yellow_button);
+                        }
+                    });
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+
+                    }
+                    view.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            ibY.setImageResource(R.drawable.dark_yellow_button);
+                        }
+                    });
+                }
+            })
+            ).start();
+        } else if (x.equals("G")) {
+            playSound(gId);
+            (new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+
+                    }
+                    view.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            ibG.setImageResource(R.drawable.bright_green_button);
+                        }
+                    });
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+
+                    }
+                    view.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            ibG.setImageResource(R.drawable.dark_green_button);
+                        }
+                    });
+                }
+            })
+            ).start();
+        } else if (x.equals("B")) {
+            playSound(bId);
+            (new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+
+                    }
+                    view.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            ibB.setImageResource(R.drawable.bright_blue_button);
+                        }
+                    });
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+
+                    }
+                    view.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            ibB.setImageResource(R.drawable.dark_blue_button);
+                        }
+                    });
+                }
+            })
+            ).start();
+        }
+
     }
 
     @Override
@@ -617,5 +267,297 @@ public class Game2Activity extends Activity implements View.OnClickListener {
         if (soundsLoaded.contains(soundId)) {
             soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f);
         }
-    } */
+    }
+
+    private void loadArray() {
+        int i = 0;
+        do {
+            compSeq[i] = randomColor();
+            i++;
+        } while (i < maxSeq)
+                ;
+    }
+
+    private String randomColor() {
+        final int random = new Random().nextInt(4);
+        if (random == 0) {
+            return "Y";
+        } else if (random == 1) {
+            return "G";
+        } else if (random == 2) {
+            return "B";
+        } else {
+            return "R";
+        }
+    }
+
+    private void compPlay(int x, int y, final View view) throws InterruptedException {
+        for (int i = x; i <= y; i++) {
+            if (compSeq[i].equals("R")) {
+                onSelect("R", view);
+            } else if (compSeq[i].equals("Y")) {
+                onSelect("Y", view);
+            } else if (compSeq[i].equals("G")) {
+                onSelect("G", view);
+            } else if (compSeq[i].equals("B")) {
+                onSelect("B", view);
+            }
+            Thread.currentThread().sleep(100);
+            Log.e("a", "b");
+        }
+    }
+
+    private void disableStart() {
+        Button btn=(Button) findViewById(R.id.begin_button);
+        btn.setEnabled(false);
+    }
+
+    private void enableStart() {
+        Button btn=(Button) findViewById(R.id.begin_button);
+        btn.setEnabled(true);
+    }
+
+    private void disableButtons() {
+        ImageButton ib=(ImageButton) findViewById(R.id.red_button);
+        ib.setClickable(false);
+        ib.setEnabled(false);
+        ib=(ImageButton) findViewById(R.id.yellow_button);
+        ib.setClickable(false);
+        ib.setEnabled(false);
+        ib=(ImageButton) findViewById(R.id.green_button);
+        ib.setClickable(false);
+        ib.setEnabled(false);
+        ib=(ImageButton) findViewById(R.id.blue_button);
+        ib.setClickable(false);
+        ib.setEnabled(false);
+    }
+
+    private void enableButtons() {
+        ImageButton ib=(ImageButton) findViewById(R.id.red_button);
+        ib.setClickable(true);
+        ib.setEnabled(true);
+        ib=(ImageButton) findViewById(R.id.yellow_button);
+        ib.setClickable(true);
+        ib.setEnabled(true);
+        ib=(ImageButton) findViewById(R.id.green_button);
+        ib.setClickable(true);
+        ib.setEnabled(true);
+        ib=(ImageButton) findViewById(R.id.blue_button);
+        ib.setClickable(true);
+        ib.setEnabled(true);
+    }
+
+    @Override
+    public void onClick(View view) {
+        TextView et = (TextView) findViewById(R.id.ready_textview);
+        if (mode == 1) {
+            if (view.getId() == R.id.begin_button) {
+                loadArray();
+                position=0;
+                maxPosition=0;
+                try {
+                    compPlay(position, maxPosition, view);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                et = (TextView) findViewById(R.id.ready_textview);
+                et.setText("Player One");
+                enableButtons();
+
+            } else if (view.getId() == R.id.red_button) {
+                et = (TextView) findViewById(R.id.ready_textview);
+                et.setText("Position: " + position + " \n Score: " + maxPosition + "\n Computer: " + compSeq[position]);
+                if (compSeq[position].equals("R") && position < maxPosition) {
+                    position++;
+                    et.setText("Position: " + position + " \n Score: " + maxPosition + "\n Computer: " + compSeq[position]);
+                } else if (compSeq[position].equals("R") && position >= maxPosition) {
+                    try {
+                        onSelect("R", view);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    position=0;
+                    maxPosition++;
+                    et.setText("Position: " + position + " \n Score: " + maxPosition + "\n Computer: " + compSeq[position]);
+                    disableButtons();
+                    try {
+                        compPlay(position, maxPosition, view);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    enableButtons();
+                } else if (compSeq[position].equals("R") && position == maxPosition && maxPosition == compSeq.length) {
+                    et = (TextView) findViewById(R.id.ready_textview);
+                    playSound(wId);
+                    et.setText("You Win!!!");
+                    disableButtons();
+                    enableStart();
+                } else {
+                    et = (TextView) findViewById(R.id.ready_textview);
+                    playSound(lId);
+                    et.setText("You Lose - Try Again!");
+                    disableButtons();
+                    enableStart();
+                }
+            } else if (view.getId() == R.id.yellow_button) {
+                et = (TextView) findViewById(R.id.ready_textview);
+                if (compSeq[position].equals("Y") && position < maxPosition) {
+                    try {
+                        onSelect("Y", view);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    position++;
+                    et.setText("Position: " + position + " \n Score: " + maxPosition + "\n Computer: " + compSeq[position]);
+                } else if (compSeq[position].equals("Y") && position >= maxPosition) {
+                    position=0;
+                    maxPosition++;
+                    et.setText("Position: " + position + " \n Score: " + maxPosition + "\n Computer: " + compSeq[position]);
+                    disableButtons();
+                    try {
+                        compPlay(position, maxPosition,view);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    enableButtons();
+                } else if (compSeq[position].equals("Y") && position == maxPosition && maxPosition == compSeq.length) {
+                    et = (TextView) findViewById(R.id.ready_textview);
+                    playSound(wId);
+                    et.setText("You Win!!!");
+                    disableButtons();
+                    enableStart();
+                } else {
+                    et = (TextView) findViewById(R.id.ready_textview);
+                    playSound(lId);
+                    et.setText("You Lose - Try Again!");
+                    disableButtons();
+                    enableStart();
+                }
+            } else if (view.getId() == R.id.green_button) {
+                et = (TextView) findViewById(R.id.ready_textview);
+                if (compSeq[position].equals("G") && position < maxPosition) {
+                    try {
+                        onSelect("G", view);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    position++;
+                    et.setText("Position: " + position + " \n Score: " + maxPosition + "\n Computer: " + compSeq[position]);
+                } else if (compSeq[position].equals("G") && position >= maxPosition) {
+                    position=0;
+                    maxPosition++;
+                    et.setText("Position: " + position + " \n Score: " + maxPosition + "\n Computer: " + compSeq[position]);
+                    disableButtons();
+                    try {
+                        compPlay(position, maxPosition, view);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    enableButtons();
+                } else if (compSeq[position].equals("G") && position == maxPosition && maxPosition == compSeq.length) {
+                    et = (TextView) findViewById(R.id.ready_textview);
+                    playSound(wId);
+                    et.setText("You Win!!!");
+                    disableButtons();
+                    enableStart();
+                } else {
+                    et = (TextView) findViewById(R.id.ready_textview);
+                    playSound(lId);
+                    et.setText("You Lose - Try Again!");
+                    disableButtons();
+                    enableStart();
+                }
+            } else if (view.getId() == R.id.blue_button) {
+                et = (TextView) findViewById(R.id.ready_textview);
+                if (compSeq[position].equals("B") && position < maxPosition) {
+                    try {
+                        onSelect("B", view);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    position++;
+                    et.setText("Position: " + position + " \n Score: " + maxPosition + "\n Computer: " + compSeq[position]);
+                } else if (compSeq[position].equals("B") && position >= maxPosition) {
+                    position=0;
+                    maxPosition++;
+                    et.setText("Position: " + position + " \n Score: " + maxPosition + "\n Computer: " + compSeq[position]);
+                    disableButtons();
+                    try {
+                        compPlay(position, maxPosition, view);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    enableButtons();
+                } else if (compSeq[position].equals("B") && position == maxPosition && maxPosition == compSeq.length) {
+                    et = (TextView) findViewById(R.id.ready_textview);
+                    playSound(wId);
+                    et.setText("You Win!!!");
+                    disableButtons();
+                    enableStart();
+                } else {
+                    et = (TextView) findViewById(R.id.ready_textview);
+                    playSound(lId);
+                    et.setText("You Lose - Try Again!");
+                    disableButtons();
+                    enableStart();
+                }
+            } else if (view.getId() == R.id.submit_button) {
+                if (maxPosition != 0) {
+                    try {
+                        compPlay(position, maxPosition, view);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    maxPosition = 0;
+                }
+                String finalScore = Integer.toString(maxPosition);
+                Intent intent = new Intent(getApplicationContext(), HighscoreActivity.class);
+                intent.putExtra(SCORE_KEY, finalScore);
+                startActivity(intent);
+            }
+        } else if (mode == 2) {
+        } else if (mode == 3) {
+            if (view.getId() == R.id.begin_button) {
+                et=(TextView) findViewById(R.id.ready_textview);
+                et.setText("Play Music");
+                enableButtons();
+            } else if (view.getId() == R.id.red_button) {
+                try {
+                    onSelect("R", view);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } else if (view.getId() == R.id.yellow_button) {
+                try {
+                    onSelect("Y", view);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } else if (view.getId() == R.id.green_button) {
+                try {
+                    onSelect("G", view);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } else if (view.getId() == R.id.blue_button) {
+                try {
+                    onSelect("B", view);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } else if (view.getId() == R.id.submit_button) {
+                try {
+                    compPlay(position, maxPosition, view);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                maxPosition = 0;
+                String finalScore = Integer.toString(maxPosition);
+                Intent intent = new Intent(getApplicationContext(), HighscoreActivity.class);
+                intent.putExtra(SCORE_KEY, finalScore);
+                startActivity(intent);
+            }
+        }
+    }
 }

@@ -3,59 +3,121 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#e08114"
-    android:gravity="center"
-    android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/ready_textview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Ready?"
-        android:textColor="#e51c19"
-        android:textSize="30sp" />
-
-    <ImageButton
-        android:id="@+id/green_button"
-        android:layout_width="100dp"
-        android:layout_height="97dp"
-        android:layout_gravity="center"
-        android:background="@null"
-        android:src="@drawable/button1" />
+    android:gravity="end"
+    android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal">
+        android:layout_gravity="start"
+        android:gravity="start"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/ready_textview"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="Ready?"
+            android:textColor="#e51c19"
+            android:textSize="12sp" />
 
         <ImageButton
-            android:id="@+id/red_button"
-            android:layout_width="100dp"
+            android:id="@+id/green_button"
+            android:layout_width="match_parent"
             android:layout_height="97dp"
+            android:layout_gravity="center"
             android:background="@null"
-            android:src="@drawable/button2" />
+            android:src="@drawable/button1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/red_button"
+                android:layout_width="100dp"
+                android:layout_height="97dp"
+                android:background="@null"
+                android:src="@drawable/button2" />
+
+            <ImageButton
+                android:id="@+id/yellow_button"
+                android:layout_width="100dp"
+                android:layout_height="97dp"
+                android:background="@null"
+                android:src="@drawable/button3" />
+        </LinearLayout>
 
         <ImageButton
-            android:id="@+id/yellow_button"
-            android:layout_width="100dp"
+            android:id="@+id/blue_button"
+            android:layout_width="match_parent"
             android:layout_height="97dp"
+            android:layout_gravity="center"
             android:background="@null"
-            android:src="@drawable/button3" />
+            android:src="@drawable/button4" />
+
+        <Button
+            android:id="@+id/begin_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Begin"
+            android:textColor="#e51c19"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/submit_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#e51c19"
+            android:text="Finish (submit score)" />
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/blue_button"
-        android:layout_width="100dp"
-        android:layout_height="97dp"
-        android:background="@null"
-        android:layout_gravity="center"
-        android:src="@drawable/button4" />
-
-    <Button
-        android:id="@+id/begin_button"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#e51c19"
-        android:text="Begin" />
+        android:gravity="end"
+        android:orientation="vertical">
+
+        <RadioGroup
+            android:id="@+id/game_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RadioButton
+                android:id="@+id/game1_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#c38a49"
+                android:paddingEnd="5dp"
+                android:text="Game 1"
+                android:textColor="#e51c19" />
+
+            <RadioButton
+                android:id="@+id/game2_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#c38a49"
+                android:paddingEnd="5dp"
+                android:text="Game 2"
+                android:textColor="#e51c19" />
+
+            <RadioButton
+                android:id="@+id/game3_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#c38a49"
+                android:paddingEnd="5dp"
+                android:text="Game 3"
+                android:textColor="#e51c19" />
+        </RadioGroup>
+
+    </LinearLayout>
+
 </LinearLayout>
