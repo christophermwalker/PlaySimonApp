@@ -12,6 +12,8 @@ import java.util.Comparator;
 
 public class HighscoreActivity extends Activity {
 
+    public static final String KEEPSCORE_KEY = "keepscore";
+
     public class Score {
         private String name;
         private String score;
@@ -46,11 +48,13 @@ public class HighscoreActivity extends Activity {
         setContentView(R.layout.activity_highscore);
         Intent intent = getIntent();
         String score = "0";
+        final String keepscore;
         if (intent.getStringExtra(Game1Activity.SCORE_KEY) != null) {
             score = intent.getStringExtra(Game1Activity.SCORE_KEY);
         } else if (intent.getStringExtra(Game2Activity.SCORE_KEY) != null) {
             score = intent.getStringExtra(Game2Activity.SCORE_KEY);
         }
+        keepscore = score;
         Score[] SCORES = {
                 new Score("!YOU",score),
                 new Score("TECA","100"),
@@ -62,7 +66,7 @@ public class HighscoreActivity extends Activity {
                 new Score("ODMI","70"),
                 new Score("USPH","66"),
                 new Score("IMEI","50"),
-                new Score("ROLJ","31")};
+                new Score("ROLJ","1")};
 
         Arrays.sort(SCORES, new Sortbyscore());
 
@@ -111,9 +115,8 @@ public class HighscoreActivity extends Activity {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(
-                        getApplicationContext(),
-                        StartActivity.class);
+                Intent intent = new Intent(getApplicationContext(), StartActivity.class);
+                intent.putExtra(KEEPSCORE_KEY, keepscore);
                 startActivity(intent);
             }
         });

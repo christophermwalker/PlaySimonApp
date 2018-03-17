@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class StartActivity extends Activity implements View.OnClickListener {
+public class StartActivity extends Activity {
 
     public static final String SCORE_KEY = "score";
 
@@ -15,33 +15,43 @@ public class StartActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-        int ids[]={R.id.play_button, R.id.highscore_button, R.id.about_button};
-        for (int id : ids) {
-            Button b =(Button) findViewById(id);
-            b.setOnClickListener(this);
+        Intent intent = getIntent();
+        String keepscore = "0";
+        if (intent.getStringExtra(HighscoreActivity.KEEPSCORE_KEY) != null) {
+            keepscore = intent.getStringExtra(HighscoreActivity.KEEPSCORE_KEY);
         }
-    }
-    @Override
-    public void onClick(View view) {
-        if (view.getId() == R.id.play_button) {
-            Intent intent = new Intent(
-                    getApplicationContext(),
-                    Game2Activity.class);
-            startActivity(intent);
-        }
+        final String keepscore2;
+        keepscore2 = keepscore;
 
-        if (view.getId() == R.id.highscore_button) {
-            String finalScore = "0";
-            Intent intent = new Intent(getApplicationContext(), HighscoreActivity.class);
-            intent.putExtra(SCORE_KEY, finalScore);
-            startActivity(intent);
-        }
+        Button b1 = (Button) findViewById(R.id.play_button);
+        Button b2 = (Button) findViewById(R.id.highscore_button);
+        Button b3 = (Button) findViewById(R.id.about_button);
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(
+                        getApplicationContext(),
+                        Game2Activity.class);
+                startActivity(intent);
+            }
+        });
 
-        if (view.getId() == R.id.about_button) {
-            Intent intent = new Intent(
-                    getApplicationContext(),
-                    AboutActivity.class);
-            startActivity(intent);
-        }
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), HighscoreActivity.class);
+                intent.putExtra(SCORE_KEY, keepscore2);
+                startActivity(intent);
+            }
+        });
+
+        b3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
+                intent.putExtra(SCORE_KEY, keepscore2);
+                startActivity(intent);
+            }
+        });
     }
 }

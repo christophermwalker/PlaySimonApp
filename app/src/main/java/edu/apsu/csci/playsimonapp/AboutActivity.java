@@ -8,18 +8,27 @@ import android.widget.Button;
 
 public class AboutActivity extends Activity {
 
+    public static final String KEEPSCORE_KEY = "keepscore";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
+        Intent intent = getIntent();
+        String score = "0";
+        final String keepscore;
+        if (intent.getStringExtra(Game1Activity.SCORE_KEY) != null) {
+            score = intent.getStringExtra(Game1Activity.SCORE_KEY);
+        }
+        keepscore = score;
+
         Button b =(Button) findViewById(R.id.start_button);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(
-                        getApplicationContext(),
-                        StartActivity.class);
+                Intent intent = new Intent(getApplicationContext(), StartActivity.class);
+                intent.putExtra(KEEPSCORE_KEY, keepscore);
                 startActivity(intent);
             }
         });

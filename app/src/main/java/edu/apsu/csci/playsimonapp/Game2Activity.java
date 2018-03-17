@@ -504,17 +504,24 @@ public class Game2Activity extends Activity implements View.OnClickListener {
             } else if (view.getId() == R.id.submit_button) {
                 if (maxPosition != 0) {
                     try {
+                        Log.i("TEST", "maxPosition: " + maxPosition);
                         compPlay(position, maxPosition, view);
+                        Log.i("TEST2", "maxPosition: " + maxPosition);
+                        String finalScore = Integer.toString(maxPosition);
+                        Intent intent = new Intent(getApplicationContext(), HighscoreActivity.class);
+                        intent.putExtra(SCORE_KEY, finalScore);
+                        startActivity(intent);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 } else {
+                    Log.i("TEST3", "maxPosition: " + maxPosition);
                     maxPosition = 0;
+                    String finalScore = Integer.toString(maxPosition);
+                    Intent intent = new Intent(getApplicationContext(), HighscoreActivity.class);
+                    intent.putExtra(SCORE_KEY, finalScore);
+                    startActivity(intent);
                 }
-                String finalScore = Integer.toString(maxPosition);
-                Intent intent = new Intent(getApplicationContext(), HighscoreActivity.class);
-                intent.putExtra(SCORE_KEY, finalScore);
-                startActivity(intent);
             }
         } else if (mode == 2) {
         } else if (mode == 3) {

@@ -106,7 +106,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:text="Return to Title Screen"
-            android:textColor="#e51c19"
+            android:textColor="#42e2f4"
             android:textSize="12sp" />
     </LinearLayout>
 

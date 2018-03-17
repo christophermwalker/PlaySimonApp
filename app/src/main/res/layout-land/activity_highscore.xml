@@ -368,6 +368,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Return to Start Screen"
-        android:textColor="#e51c19" />
+        android:textColor="#42e2f4" />
 
 </LinearLayout>

@@ -20,7 +20,8 @@
             android:gravity="center"
             android:textStyle="bold"
             android:text="Ready?"
-            android:textColor="#e51c19"
+            android:freezesText="true"
+            android:textColor="#42e2f4"
             android:textSize="12sp" />
 
         <ImageButton
@@ -65,14 +66,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Begin"
-            android:textColor="#e51c19"
+            android:textColor="#42e2f4"
             android:textSize="24sp" />
 
         <Button
             android:id="@+id/submit_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#e51c19"
+            android:textColor="#42e2f4"
             android:text="Finish (submit score)" />
     </LinearLayout>
 
@@ -95,7 +96,7 @@
                 android:background="#c38a49"
                 android:paddingEnd="5dp"
                 android:text="Game 1"
-                android:textColor="#e51c19" />
+                android:textColor="#42e2f4" />
 
             <RadioButton
                 android:id="@+id/game2_button"
@@ -105,7 +106,7 @@
                 android:background="#c38a49"
                 android:paddingEnd="5dp"
                 android:text="Game 2"
-                android:textColor="#e51c19" />
+                android:textColor="#42e2f4" />
 
             <RadioButton
                 android:id="@+id/game3_button"
@@ -115,7 +116,7 @@
                 android:background="#c38a49"
                 android:paddingEnd="5dp"
                 android:text="Game 3"
-                android:textColor="#e51c19" />
+                android:textColor="#42e2f4" />
         </RadioGroup>
 
     </LinearLayout>
