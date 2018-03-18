@@ -1,6 +1,7 @@
 package edu.apsu.csci.playsimonapp;
 
 import android.app.Activity;
+import android.app.IntentService;
 import android.content.Intent;
 import android.media.AudioAttributes;
 import android.media.SoundPool;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.lang.annotation.Annotation;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -32,7 +34,7 @@ import static java.util.function.Predicate.isEqual;
 public class Game2Activity extends Activity implements View.OnClickListener {
     public static final String SCORE_KEY = "score";
 
-    private int delay = 1000;
+    private int delay = 300;
     private SoundPool soundPool;
     private Set<Integer> soundsLoaded;
     private int rId = 0;
@@ -49,9 +51,14 @@ public class Game2Activity extends Activity implements View.OnClickListener {
     //private String[] playerSeq=new String[maxSeq];
     private RadioGroup radioGroup;
 
+    private ArrayList<Integer> data;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        data = new ArrayList<>();
+
         setContentView(R.layout.activity_game2);
         soundsLoaded = new HashSet<Integer>();
         disableButtons();
@@ -123,131 +130,115 @@ public class Game2Activity extends Activity implements View.OnClickListener {
     }
 
 
-    public void onSelect(String x, final View view) throws InterruptedException {
+    public void onSelect(String x) throws InterruptedException {
         final ImageButton ibR = (ImageButton) findViewById(R.id.red_button);
         final ImageButton ibY = (ImageButton) findViewById(R.id.yellow_button);
         final ImageButton ibG = (ImageButton) findViewById(R.id.green_button);
         final ImageButton ibB = (ImageButton) findViewById(R.id.blue_button);
         if (x.equals("R")) {
+            try {
+                Log.i("LOADS", "+1");
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+
+            }
             playSound(rId);
-            (new Thread(new Runnable() {
-                @Override
+            ibR.setImageResource(R.drawable.bright_red_button);
+            final Handler handler = new Handler();
+            Timer t = new Timer();
+            t.schedule(new TimerTask() {
                 public void run() {
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-
-                    }
-                    view.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ibR.setImageResource(R.drawable.bright_red_button);
-                        }
-                    });
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-
-                    }
-                    view.post(new Runnable() {
-                        @Override
+                    handler.post(new Runnable() {
                         public void run() {
                             ibR.setImageResource(R.drawable.dark_red_button);
+                            try {
+                                Log.i("LOADS", "+1");
+                                Thread.sleep(10);
+                            } catch (InterruptedException e) {
+
+                            }
                         }
                     });
                 }
-            })
-            ).start();
+            }, delay);
         } else if (x.equals("Y")) {
+            try {
+                Log.i("LOADS", "+1");
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+
+            }
             playSound(yId);
-            (new Thread(new Runnable() {
-                @Override
+            ibY.setImageResource(R.drawable.bright_yellow_button);
+            final Handler handler = new Handler();
+            Timer t = new Timer();
+            t.schedule(new TimerTask() {
                 public void run() {
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-
-                    }
-                    view.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ibY.setImageResource(R.drawable.bright_yellow_button);
-                        }
-                    });
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-
-                    }
-                    view.post(new Runnable() {
-                        @Override
+                    handler.post(new Runnable() {
                         public void run() {
                             ibY.setImageResource(R.drawable.dark_yellow_button);
+                            try {
+                                Log.i("LOADS", "+1");
+                                Thread.sleep(100);
+                            } catch (InterruptedException e) {
+
+                            }
                         }
                     });
                 }
-            })
-            ).start();
+            }, delay);
         } else if (x.equals("G")) {
+            try {
+                Log.i("LOADS", "+1");
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+
+            }
             playSound(gId);
-            (new Thread(new Runnable() {
-                @Override
+            ibG.setImageResource(R.drawable.bright_green_button);
+            final Handler handler = new Handler();
+            Timer t = new Timer();
+            t.schedule(new TimerTask() {
                 public void run() {
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-
-                    }
-                    view.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ibG.setImageResource(R.drawable.bright_green_button);
-                        }
-                    });
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-
-                    }
-                    view.post(new Runnable() {
-                        @Override
+                    handler.post(new Runnable() {
                         public void run() {
                             ibG.setImageResource(R.drawable.dark_green_button);
+                            try {
+                                Log.i("LOADS", "+1");
+                                Thread.sleep(100);
+                            } catch (InterruptedException e) {
+
+                            }
                         }
                     });
                 }
-            })
-            ).start();
+            }, delay);
         } else if (x.equals("B")) {
+            try {
+                Log.i("LOADS", "+1");
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+
+            }
             playSound(bId);
-            (new Thread(new Runnable() {
-                @Override
+            ibB.setImageResource(R.drawable.bright_blue_button);
+            final Handler handler = new Handler();
+            Timer t = new Timer();
+            t.schedule(new TimerTask() {
                 public void run() {
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-
-                    }
-                    view.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ibB.setImageResource(R.drawable.bright_blue_button);
-                        }
-                    });
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-
-                    }
-                    view.post(new Runnable() {
-                        @Override
+                    handler.post(new Runnable() {
                         public void run() {
                             ibB.setImageResource(R.drawable.dark_blue_button);
+                            try {
+                                Log.i("LOADS", "+1");
+                                Thread.sleep(100);
+                            } catch (InterruptedException e) {
+
+                            }
                         }
                     });
                 }
-            })
-            ).start();
+            }, delay);
         }
 
     }
@@ -272,89 +263,159 @@ public class Game2Activity extends Activity implements View.OnClickListener {
     private void loadArray() {
         int i = 0;
         do {
-            compSeq[i] = randomColor();
+            compSeq[i]=randomColor();
             i++;
-        } while (i < maxSeq)
-                ;
+        } while (i < maxSeq);
     }
 
     private String randomColor() {
         final int random = new Random().nextInt(4);
         if (random == 0) {
+            try {
+                Log.i("LOADS", "+1");
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+
+            }
             return "Y";
         } else if (random == 1) {
+            try {
+                Log.i("LOADS", "+1");
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+
+            }
             return "G";
         } else if (random == 2) {
+            try {
+                Log.i("LOADS", "+1");
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+
+            }
             return "B";
         } else {
+            try {
+                Log.i("LOADS", "+1");
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+
+            }
             return "R";
         }
     }
 
     private void compPlay(int x, int y, final View view) throws InterruptedException {
+        final ImageButton ibR = (ImageButton) findViewById(R.id.red_button);
+        final ImageButton ibY = (ImageButton) findViewById(R.id.yellow_button);
+        final ImageButton ibG = (ImageButton) findViewById(R.id.green_button);
+        final ImageButton ibB = (ImageButton) findViewById(R.id.blue_button);
         for (int i = x; i <= y; i++) {
             if (compSeq[i].equals("R")) {
-                onSelect("R", view);
+                ibR.setImageResource(R.drawable.dark_red_button);
+                (new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(50);
+                        } catch (InterruptedException e) {
+
+                        }
+                        view.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                ibR.setImageResource(R.drawable.bright_red_button);
+                            }
+                        });
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+
+                        }
+                        view.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                ibR.setImageResource(R.drawable.dark_red_button);
+                            }
+                        });
+                        /*try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+
+                        }
+                        view.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                ibR.setImageResource(R.drawable.dark_red_button);
+                            }
+                        }); */
+                    }
+                })
+                ).start();
             } else if (compSeq[i].equals("Y")) {
-                onSelect("Y", view);
-            } else if (compSeq[i].equals("G")) {
-                onSelect("G", view);
+                onSelect("Y");
+            } else if (compSeq[i].equals("R")) {
+                onSelect("G");
             } else if (compSeq[i].equals("B")) {
-                onSelect("B", view);
+                onSelect("B");
             }
-            Thread.currentThread().sleep(100);
+            //Thread.currentThread().sleep(10);
             Log.e("a", "b");
         }
     }
 
     private void disableStart() {
-        Button btn=(Button) findViewById(R.id.begin_button);
-        btn.setEnabled(false);
+        Button b = (Button) findViewById(R.id.begin_button);
+        b.setEnabled(false);
     }
 
     private void enableStart() {
-        Button btn=(Button) findViewById(R.id.begin_button);
-        btn.setEnabled(true);
+        Button b = (Button) findViewById(R.id.begin_button);
+        b.setEnabled(true);
     }
 
     private void disableButtons() {
-        ImageButton ib=(ImageButton) findViewById(R.id.red_button);
+        ImageButton ib = (ImageButton) findViewById(R.id.red_button);
         ib.setClickable(false);
         ib.setEnabled(false);
-        ib=(ImageButton) findViewById(R.id.yellow_button);
+        ib = (ImageButton) findViewById(R.id.yellow_button);
         ib.setClickable(false);
         ib.setEnabled(false);
-        ib=(ImageButton) findViewById(R.id.green_button);
+        ib = (ImageButton) findViewById(R.id.green_button);
         ib.setClickable(false);
         ib.setEnabled(false);
-        ib=(ImageButton) findViewById(R.id.blue_button);
+        ib = (ImageButton) findViewById(R.id.blue_button);
         ib.setClickable(false);
         ib.setEnabled(false);
     }
 
     private void enableButtons() {
-        ImageButton ib=(ImageButton) findViewById(R.id.red_button);
+        ImageButton ib = (ImageButton) findViewById(R.id.red_button);
         ib.setClickable(true);
         ib.setEnabled(true);
-        ib=(ImageButton) findViewById(R.id.yellow_button);
+        ib = (ImageButton) findViewById(R.id.yellow_button);
         ib.setClickable(true);
         ib.setEnabled(true);
-        ib=(ImageButton) findViewById(R.id.green_button);
+        ib = (ImageButton) findViewById(R.id.green_button);
         ib.setClickable(true);
         ib.setEnabled(true);
-        ib=(ImageButton) findViewById(R.id.blue_button);
+        ib = (ImageButton) findViewById(R.id.blue_button);
         ib.setClickable(true);
         ib.setEnabled(true);
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(final View view) {
         TextView et = (TextView) findViewById(R.id.ready_textview);
+        final ImageButton ibR = (ImageButton) findViewById(R.id.red_button);
+        final ImageButton ibY = (ImageButton) findViewById(R.id.yellow_button);
+        final ImageButton ibG = (ImageButton) findViewById(R.id.green_button);
+        final ImageButton ibB = (ImageButton) findViewById(R.id.blue_button);
         if (mode == 1) {
             if (view.getId() == R.id.begin_button) {
                 loadArray();
-                position=0;
-                maxPosition=0;
+                position = 0;
+                maxPosition = 0;
                 try {
                     compPlay(position, maxPosition, view);
                 } catch (InterruptedException e) {
@@ -371,12 +432,47 @@ public class Game2Activity extends Activity implements View.OnClickListener {
                     position++;
                     et.setText("Position: " + position + " \n Score: " + maxPosition + "\n Computer: " + compSeq[position]);
                 } else if (compSeq[position].equals("R") && position >= maxPosition) {
-                    try {
-                        onSelect("R", view);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    position=0;
+                    ibR.setImageResource(R.drawable.dark_red_button);
+                    (new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                Thread.sleep(50);
+                            } catch (InterruptedException e) {
+
+                            }
+                            view.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    ibR.setImageResource(R.drawable.bright_red_button);
+                                }
+                            });
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+
+                            }
+                            view.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    ibR.setImageResource(R.drawable.dark_red_button);
+                                }
+                            });
+                            /*try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+
+                            }
+                            view.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    ibR.setImageResource(R.drawable.dark_red_button);
+                                }
+                            }); */
+                        }
+                    })
+                    ).start();
+                    position = 0;
                     maxPosition++;
                     et.setText("Position: " + position + " \n Score: " + maxPosition + "\n Computer: " + compSeq[position]);
                     disableButtons();
@@ -403,19 +499,19 @@ public class Game2Activity extends Activity implements View.OnClickListener {
                 et = (TextView) findViewById(R.id.ready_textview);
                 if (compSeq[position].equals("Y") && position < maxPosition) {
                     try {
-                        onSelect("Y", view);
+                        onSelect("Y");
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                     position++;
                     et.setText("Position: " + position + " \n Score: " + maxPosition + "\n Computer: " + compSeq[position]);
                 } else if (compSeq[position].equals("Y") && position >= maxPosition) {
-                    position=0;
+                    position = 0;
                     maxPosition++;
                     et.setText("Position: " + position + " \n Score: " + maxPosition + "\n Computer: " + compSeq[position]);
                     disableButtons();
                     try {
-                        compPlay(position, maxPosition,view);
+                        compPlay(position, maxPosition, view);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -437,14 +533,14 @@ public class Game2Activity extends Activity implements View.OnClickListener {
                 et = (TextView) findViewById(R.id.ready_textview);
                 if (compSeq[position].equals("G") && position < maxPosition) {
                     try {
-                        onSelect("G", view);
+                        onSelect("G");
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                     position++;
                     et.setText("Position: " + position + " \n Score: " + maxPosition + "\n Computer: " + compSeq[position]);
                 } else if (compSeq[position].equals("G") && position >= maxPosition) {
-                    position=0;
+                    position = 0;
                     maxPosition++;
                     et.setText("Position: " + position + " \n Score: " + maxPosition + "\n Computer: " + compSeq[position]);
                     disableButtons();
@@ -471,14 +567,14 @@ public class Game2Activity extends Activity implements View.OnClickListener {
                 et = (TextView) findViewById(R.id.ready_textview);
                 if (compSeq[position].equals("B") && position < maxPosition) {
                     try {
-                        onSelect("B", view);
+                        onSelect("B");
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                     position++;
                     et.setText("Position: " + position + " \n Score: " + maxPosition + "\n Computer: " + compSeq[position]);
                 } else if (compSeq[position].equals("B") && position >= maxPosition) {
-                    position=0;
+                    position = 0;
                     maxPosition++;
                     et.setText("Position: " + position + " \n Score: " + maxPosition + "\n Computer: " + compSeq[position]);
                     disableButtons();
@@ -502,26 +598,10 @@ public class Game2Activity extends Activity implements View.OnClickListener {
                     enableStart();
                 }
             } else if (view.getId() == R.id.submit_button) {
-                if (maxPosition != 0) {
-                    try {
-                        Log.i("TEST", "maxPosition: " + maxPosition);
-                        compPlay(position, maxPosition, view);
-                        Log.i("TEST2", "maxPosition: " + maxPosition);
-                        String finalScore = Integer.toString(maxPosition);
-                        Intent intent = new Intent(getApplicationContext(), HighscoreActivity.class);
-                        intent.putExtra(SCORE_KEY, finalScore);
-                        startActivity(intent);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    Log.i("TEST3", "maxPosition: " + maxPosition);
-                    maxPosition = 0;
-                    String finalScore = Integer.toString(maxPosition);
-                    Intent intent = new Intent(getApplicationContext(), HighscoreActivity.class);
-                    intent.putExtra(SCORE_KEY, finalScore);
-                    startActivity(intent);
-                }
+                String finalScore = Integer.toString(maxPosition);
+                Intent intent = new Intent(getApplicationContext(), HighscoreActivity.class);
+                intent.putExtra(SCORE_KEY, finalScore);
+                startActivity(intent);
             }
         } else if (mode == 2) {
         } else if (mode == 3) {
@@ -531,35 +611,29 @@ public class Game2Activity extends Activity implements View.OnClickListener {
                 enableButtons();
             } else if (view.getId() == R.id.red_button) {
                 try {
-                    onSelect("R", view);
+                    onSelect("R");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             } else if (view.getId() == R.id.yellow_button) {
                 try {
-                    onSelect("Y", view);
+                    onSelect("Y");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             } else if (view.getId() == R.id.green_button) {
                 try {
-                    onSelect("G", view);
+                    onSelect("G");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             } else if (view.getId() == R.id.blue_button) {
                 try {
-                    onSelect("B", view);
+                    onSelect("B");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             } else if (view.getId() == R.id.submit_button) {
-                try {
-                    compPlay(position, maxPosition, view);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                maxPosition = 0;
                 String finalScore = Integer.toString(maxPosition);
                 Intent intent = new Intent(getApplicationContext(), HighscoreActivity.class);
                 intent.putExtra(SCORE_KEY, finalScore);

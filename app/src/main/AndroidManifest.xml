@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".Game1Activity">
         </activity>
-        <activity android:name=".Game2Activity">
+        <activity android:name=".Game2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity android:name=".HighscoreActivity">
         </activity>
