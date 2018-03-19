@@ -1,40 +1,24 @@
 package edu.apsu.csci.playsimonapp;
 
 import android.app.Activity;
-import android.app.IntentService;
 import android.content.Intent;
 import android.media.AudioAttributes;
 import android.media.SoundPool;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.annotation.Annotation;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
-import static java.util.function.Predicate.isEqual;
-
 
 public class SimonActivity extends Activity implements View.OnClickListener {
     public static final String SCORE_KEY = "score";
 
-    private int delay = 300;
     private SoundPool soundPool;
     private Set<Integer> soundsLoaded;
     private int rId = 0;
@@ -48,7 +32,6 @@ public class SimonActivity extends Activity implements View.OnClickListener {
     private int maxPosition = 0;
     private int maxSeq = 20;
     private String[] compSeq = new String[maxSeq];
-    //private String[] playerSeq=new String[maxSeq];
     private RadioGroup radioGroup;
 
     private int secretCounter = 0;
@@ -121,7 +104,7 @@ public class SimonActivity extends Activity implements View.OnClickListener {
         soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
             @Override
             public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-                if (status == 0) { // success
+                if (status == 0) {
                     soundsLoaded.add(sampleId);
                 } else {
 
@@ -531,7 +514,6 @@ public class SimonActivity extends Activity implements View.OnClickListener {
                 onSelect("B", view);
             }
             Thread.currentThread().sleep(100);
-            Log.e("a", "b");
         }
     }
 
@@ -547,7 +529,6 @@ public class SimonActivity extends Activity implements View.OnClickListener {
                 onSelect2("B", view);
             }
             Thread.currentThread().sleep(100);
-            Log.e("a", "b");
         }
     }
 
@@ -563,7 +544,6 @@ public class SimonActivity extends Activity implements View.OnClickListener {
                 onSelect3("B", view);
             }
             Thread.currentThread().sleep(100);
-            Log.e("a", "b");
         }
     }
 
@@ -651,7 +631,6 @@ public class SimonActivity extends Activity implements View.OnClickListener {
             } else if (view.getId() == R.id.red_button) {
                 secretCounter = 0;
                 et = (TextView) findViewById(R.id.ready_textview);
-                Log.i("maxPosition", "maxPosition: " + maxPosition);
                 if (compSeq[position].equals("R") && position < maxPosition) {
                     try {
                         onSelect("R", view);
@@ -689,7 +668,6 @@ public class SimonActivity extends Activity implements View.OnClickListener {
             } else if (view.getId() == R.id.yellow_button) {
                 secretCounter = 0;
                 et = (TextView) findViewById(R.id.ready_textview);
-                Log.i("maxPosition", "maxPosition: " + maxPosition);
                 if (compSeq[position].equals("Y") && position < maxPosition) {
                     try {
                         onSelect("Y", view);
@@ -727,7 +705,6 @@ public class SimonActivity extends Activity implements View.OnClickListener {
             } else if (view.getId() == R.id.green_button) {
                 secretCounter = 0;
                 et = (TextView) findViewById(R.id.ready_textview);
-                Log.i("maxPosition", "maxPosition: " + maxPosition);
                 if (compSeq[position].equals("G") && position < maxPosition) {
                     try {
                         onSelect("G", view);
@@ -765,7 +742,6 @@ public class SimonActivity extends Activity implements View.OnClickListener {
             } else if (view.getId() == R.id.blue_button) {
                 secretCounter = 0;
                 et = (TextView) findViewById(R.id.ready_textview);
-                Log.i("maxPosition", "maxPosition: " + maxPosition);
                 if (compSeq[position].equals("B") && position < maxPosition) {
                     try {
                         onSelect("B", view);
@@ -843,7 +819,6 @@ public class SimonActivity extends Activity implements View.OnClickListener {
             } else if (view.getId() == R.id.red_button) {
                 secretCounter = 0;
                 et = (TextView) findViewById(R.id.ready_textview);
-                Log.i("maxPosition", "maxPosition: " + maxPosition);
                 if (compSeq[position].equals("R") && position < maxPosition) {
                     try {
                         onSelect2("R", view);
@@ -881,7 +856,6 @@ public class SimonActivity extends Activity implements View.OnClickListener {
             } else if (view.getId() == R.id.yellow_button) {
                 secretCounter = 0;
                 et = (TextView) findViewById(R.id.ready_textview);
-                Log.i("maxPosition", "maxPosition: " + maxPosition);
                 if (compSeq[position].equals("Y") && position < maxPosition) {
                     try {
                         onSelect2("Y", view);
@@ -919,7 +893,6 @@ public class SimonActivity extends Activity implements View.OnClickListener {
             } else if (view.getId() == R.id.green_button) {
                 secretCounter = 0;
                 et = (TextView) findViewById(R.id.ready_textview);
-                Log.i("maxPosition", "maxPosition: " + maxPosition);
                 if (compSeq[position].equals("G") && position < maxPosition) {
                     try {
                         onSelect2("G", view);
@@ -957,7 +930,6 @@ public class SimonActivity extends Activity implements View.OnClickListener {
             } else if (view.getId() == R.id.blue_button) {
                 secretCounter = 0;
                 et = (TextView) findViewById(R.id.ready_textview);
-                Log.i("maxPosition", "maxPosition: " + maxPosition);
                 if (compSeq[position].equals("B") && position < maxPosition) {
                     try {
                         onSelect2("B", view);
@@ -1035,7 +1007,6 @@ public class SimonActivity extends Activity implements View.OnClickListener {
             } else if (view.getId() == R.id.red_button) {
                 secretCounter = 0;
                 et = (TextView) findViewById(R.id.ready_textview);
-                Log.i("maxPosition", "maxPosition: " + maxPosition);
                 if (compSeq[position].equals("R") && position < maxPosition) {
                     try {
                         onSelect3("R", view);
@@ -1073,7 +1044,6 @@ public class SimonActivity extends Activity implements View.OnClickListener {
             } else if (view.getId() == R.id.yellow_button) {
                 secretCounter = 0;
                 et = (TextView) findViewById(R.id.ready_textview);
-                Log.i("maxPosition", "maxPosition: " + maxPosition);
                 if (compSeq[position].equals("Y") && position < maxPosition) {
                     try {
                         onSelect3("Y", view);
@@ -1111,7 +1081,6 @@ public class SimonActivity extends Activity implements View.OnClickListener {
             } else if (view.getId() == R.id.green_button) {
                 secretCounter = 0;
                 et = (TextView) findViewById(R.id.ready_textview);
-                Log.i("maxPosition", "maxPosition: " + maxPosition);
                 if (compSeq[position].equals("G") && position < maxPosition) {
                     try {
                         onSelect3("G", view);
@@ -1149,7 +1118,6 @@ public class SimonActivity extends Activity implements View.OnClickListener {
             } else if (view.getId() == R.id.blue_button) {
                 secretCounter = 0;
                 et = (TextView) findViewById(R.id.ready_textview);
-                Log.i("maxPosition", "maxPosition: " + maxPosition);
                 if (compSeq[position].equals("B") && position < maxPosition) {
                     try {
                         onSelect3("B", view);
