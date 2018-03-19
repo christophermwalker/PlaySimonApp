@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PlaySimonApp.iml" filepath="$PROJECT_DIR$/PlaySimonApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/PlaySimonApp-app.iml" filepath="$PROJECT_DIR$/app/PlaySimonApp-app.iml" />
+      <module fileurl="file://C:\CSCI4020\AndroidStudioProjects\Assignments\A2\PlaySimonApp\Play_Simon.iml" filepath="C:\CSCI4020\AndroidStudioProjects\Assignments\A2\PlaySimonApp\Play_Simon.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
