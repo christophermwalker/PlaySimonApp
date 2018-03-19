@@ -84,13 +84,19 @@ public class SimonActivity extends Activity implements View.OnClickListener {
                         enableStart();
                     } else if (checkedId == R.id.game2_button) {
                         mode = 2;
-                        Toast.makeText(getApplicationContext(), "choice: Two Player",
+                        Toast.makeText(getApplicationContext(), "choice: Same Button",
                                 Toast.LENGTH_SHORT).show();
                         disableButtons();
                         enableStart();
                     } else if (checkedId == R.id.game3_button) {
                         mode = 3;
-                        Toast.makeText(getApplicationContext(), "choice: Music",
+                        Toast.makeText(getApplicationContext(), "choice: Only Sounds",
+                                Toast.LENGTH_SHORT).show();
+                        disableButtons();
+                        enableStart();
+                    } else if (checkedId == R.id.game4_button) {
+                        mode = 4;
+                        Toast.makeText(getApplicationContext(), "choice: Free Play",
                                 Toast.LENGTH_SHORT).show();
                         disableButtons();
                         enableStart();
@@ -386,7 +392,22 @@ public class SimonActivity extends Activity implements View.OnClickListener {
             })
             ).start();
         }
+    }
 
+    public void onSelect3(String x, final View view) throws InterruptedException {
+        final ImageButton ibR = (ImageButton) findViewById(R.id.red_button);
+        final ImageButton ibY = (ImageButton) findViewById(R.id.yellow_button);
+        final ImageButton ibG = (ImageButton) findViewById(R.id.green_button);
+        final ImageButton ibB = (ImageButton) findViewById(R.id.blue_button);
+        if (x.equals("R")) {
+            playSound(rId);
+        } else if (x.equals("Y")) {
+            playSound(yId);
+        } else if (x.equals("G")) {
+            playSound(gId);
+        } else if (x.equals("B")) {
+            playSound(bId);
+        }
     }
 
     @Override
@@ -462,6 +483,22 @@ public class SimonActivity extends Activity implements View.OnClickListener {
         }
     }
 
+    private void compPlay3(int x, int y, final View view) throws InterruptedException {
+        for (int i = x; i <= y; i++) {
+            if (compSeq[i].equals("R")) {
+                onSelect3("R", view);
+            } else if (compSeq[i].equals("Y")) {
+                onSelect3("Y", view);
+            } else if (compSeq[i].equals("G")) {
+                onSelect3("G", view);
+            } else if (compSeq[i].equals("B")) {
+                onSelect3("B", view);
+            }
+            Thread.currentThread().sleep(100);
+            Log.e("a", "b");
+        }
+    }
+
     private void enableStart() {
         Button btn=(Button) findViewById(R.id.begin_button);
         btn.setEnabled(true);
@@ -497,6 +534,17 @@ public class SimonActivity extends Activity implements View.OnClickListener {
         ib.setEnabled(true);
     }
 
+    private void normalButtons() {
+        ImageButton ib=(ImageButton) findViewById(R.id.red_button);
+        ib.setImageResource(R.drawable.dark_red_button);
+        ImageButton ib2=(ImageButton) findViewById(R.id.yellow_button);
+        ib2.setImageResource(R.drawable.dark_yellow_button);
+        ImageButton ib3=(ImageButton) findViewById(R.id.green_button);
+        ib3.setImageResource(R.drawable.dark_green_button);
+        ImageButton ib4=(ImageButton) findViewById(R.id.blue_button);
+        ib4.setImageResource(R.drawable.dark_blue_button);
+    }
+
     private void yellowButtons() {
         ImageButton ib=(ImageButton) findViewById(R.id.red_button);
         ib.setImageResource(R.drawable.dark_yellow_button);
@@ -513,6 +561,7 @@ public class SimonActivity extends Activity implements View.OnClickListener {
         TextView et = (TextView) findViewById(R.id.ready_textview);
         TextView et2 = (TextView) findViewById(R.id.secret_textview);
         if (mode == 1) {
+            normalButtons();
             if (view.getId() == R.id.begin_button) {
                 if (secretCounter == 4) {
                     Toast.makeText(this, "Here you go.", Toast.LENGTH_LONG).show();
@@ -896,9 +945,202 @@ public class SimonActivity extends Activity implements View.OnClickListener {
                 }
             }
         } else if (mode == 3) {
+            normalButtons();
+            if (view.getId() == R.id.begin_button) {
+                if (secretCounter == 4) {
+                    Toast.makeText(this, "Here you go.", Toast.LENGTH_LONG).show();
+                    et2.setVisibility(View.VISIBLE);
+                }
+                secretCounter++;
+                loadArray();
+                position=0;
+                maxPosition=0;
+                try {
+                    compPlay3(position, maxPosition, view);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                et = (TextView) findViewById(R.id.ready_textview);
+                et.setText("Player One");
+                enableButtons();
+
+            } else if (view.getId() == R.id.red_button) {
+                secretCounter = 0;
+                et = (TextView) findViewById(R.id.ready_textview);
+                Log.i("maxPosition", "maxPosition: " + maxPosition);
+                if (compSeq[position].equals("R") && position < maxPosition) {
+                    try {
+                        onSelect3("R", view);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    position++;
+                    et.setText("Position: " + position + " \n Score: " + maxPosition);
+                    et2.setText("Computer: " + compSeq[position]);
+                } else if (maxPosition == (maxSeq - 1)) {
+                    et = (TextView) findViewById(R.id.ready_textview);
+                    playSound(wId);
+                    et.setText("You Win! Submit your score!");
+                    disableButtons();
+                    enableStart();
+                } else if (compSeq[position].equals("R") && position >= maxPosition) {
+                    position=0;
+                    maxPosition++;
+                    et.setText("Position: " + position + " \n Score: " + maxPosition);
+                    et2.setText("Computer: " + compSeq[position]);
+                    disableButtons();
+                    try {
+                        compPlay3(position, maxPosition,view);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    enableButtons();
+                } else {
+                    et = (TextView) findViewById(R.id.ready_textview);
+                    playSound(lId);
+                    et.setText("You Lose - Try Again!");
+                    disableButtons();
+                    enableStart();
+                }
+            } else if (view.getId() == R.id.yellow_button) {
+                secretCounter = 0;
+                et = (TextView) findViewById(R.id.ready_textview);
+                Log.i("maxPosition", "maxPosition: " + maxPosition);
+                if (compSeq[position].equals("Y") && position < maxPosition) {
+                    try {
+                        onSelect3("Y", view);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    position++;
+                    et.setText("Position: " + position + " \n Score: " + maxPosition);
+                    et2.setText("Computer: " + compSeq[position]);
+                } else if (maxPosition == (maxSeq - 1)) {
+                    et = (TextView) findViewById(R.id.ready_textview);
+                    playSound(wId);
+                    et.setText("You Win! Submit your score!");
+                    disableButtons();
+                    enableStart();
+                } else if (compSeq[position].equals("Y") && position >= maxPosition) {
+                    position=0;
+                    maxPosition++;
+                    et.setText("Position: " + position + " \n Score: " + maxPosition);
+                    et2.setText("Computer: " + compSeq[position]);
+                    disableButtons();
+                    try {
+                        compPlay3(position, maxPosition,view);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    enableButtons();
+                } else {
+                    et = (TextView) findViewById(R.id.ready_textview);
+                    playSound(lId);
+                    et.setText("You Lose - Try Again!");
+                    disableButtons();
+                    enableStart();
+                }
+            } else if (view.getId() == R.id.green_button) {
+                secretCounter = 0;
+                et = (TextView) findViewById(R.id.ready_textview);
+                Log.i("maxPosition", "maxPosition: " + maxPosition);
+                if (compSeq[position].equals("G") && position < maxPosition) {
+                    try {
+                        onSelect3("G", view);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    position++;
+                    et.setText("Position: " + position + " \n Score: " + maxPosition);
+                    et2.setText("Computer: " + compSeq[position]);
+                } else if (maxPosition == (maxSeq - 1)) {
+                    et = (TextView) findViewById(R.id.ready_textview);
+                    playSound(wId);
+                    et.setText("You Win! Submit your score!");
+                    disableButtons();
+                    enableStart();
+                } else if (compSeq[position].equals("G") && position >= maxPosition) {
+                    position=0;
+                    maxPosition++;
+                    et.setText("Position: " + position + " \n Score: " + maxPosition);
+                    et2.setText("Computer: " + compSeq[position]);
+                    disableButtons();
+                    try {
+                        compPlay3(position, maxPosition, view);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    enableButtons();
+                } else {
+                    et = (TextView) findViewById(R.id.ready_textview);
+                    playSound(lId);
+                    et.setText("You Lose - Try Again!");
+                    disableButtons();
+                    enableStart();
+                }
+            } else if (view.getId() == R.id.blue_button) {
+                secretCounter = 0;
+                et = (TextView) findViewById(R.id.ready_textview);
+                Log.i("maxPosition", "maxPosition: " + maxPosition);
+                if (compSeq[position].equals("B") && position < maxPosition) {
+                    try {
+                        onSelect3("B", view);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    position++;
+                    et.setText("Position: " + position + " \n Score: " + maxPosition);
+                    et2.setText("Computer: " + compSeq[position]);
+                } else if (maxPosition == (maxSeq - 1)) {
+                    et = (TextView) findViewById(R.id.ready_textview);
+                    playSound(wId);
+                    et.setText("You Win! Submit your score!");
+                    disableButtons();
+                    enableStart();
+                } else if (compSeq[position].equals("B") && position >= maxPosition) {
+                    position=0;
+                    maxPosition++;
+                    et.setText("Position: " + position + " \n Score: " + maxPosition);
+                    et2.setText("Computer: " + compSeq[position]);
+                    disableButtons();
+                    try {
+                        compPlay3(position, maxPosition, view);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    enableButtons();
+                } else {
+                    et = (TextView) findViewById(R.id.ready_textview);
+                    playSound(lId);
+                    et.setText("You Lose - Try Again!");
+                    disableButtons();
+                    enableStart();
+                }
+            } else if (view.getId() == R.id.submit_button) {
+                secretCounter = 0;
+                if (maxPosition != 0) {
+                    try {
+                        compPlay3(position, maxPosition, view);
+                        String finalScore = Integer.toString(maxPosition);
+                        Intent intent = new Intent(getApplicationContext(), HighscoreActivity.class);
+                        intent.putExtra(SCORE_KEY, finalScore);
+                        startActivity(intent);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    maxPosition = 0;
+                    String finalScore = Integer.toString(maxPosition);
+                    Intent intent = new Intent(getApplicationContext(), HighscoreActivity.class);
+                    intent.putExtra(SCORE_KEY, finalScore);
+                    startActivity(intent);
+                }
+            }
+        } else if (mode == 4) {
+            normalButtons();
             if (view.getId() == R.id.begin_button) {
                 et=(TextView) findViewById(R.id.ready_textview);
-                et.setText("Play Music");
+                et.setText("Free Play");
                 enableButtons();
             } else if (view.getId() == R.id.red_button) {
                 try {

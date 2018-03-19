@@ -108,8 +108,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:checked="true"
                     android:background="#c38a49"
+                    android:checked="true"
                     android:paddingEnd="5dp"
                     android:text="Game 1"
                     android:textAlignment="center"
@@ -136,6 +136,18 @@
                     android:text="Game 3"
                     android:textAlignment="center"
                     android:textColor="#42e2f4" />
+
+                <RadioButton
+                    android:id="@+id/game4_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#c38a49"
+                    android:paddingEnd="5dp"
+                    android:text="Game 4"
+                    android:textAlignment="center"
+                    android:textColor="#42e2f4" />
+
             </RadioGroup>
 
             <Button
