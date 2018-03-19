@@ -143,7 +143,13 @@ public class SimonActivity extends Activity implements View.OnClickListener {
         final ImageButton ibG = (ImageButton) findViewById(R.id.green_button);
         final ImageButton ibB = (ImageButton) findViewById(R.id.blue_button);
         if (x.equals("R")) {
-            playSound(rId);
+            try {
+                Thread.sleep(100);
+                playSound(rId);
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+
+            }
             (new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -173,7 +179,13 @@ public class SimonActivity extends Activity implements View.OnClickListener {
             })
             ).start();
         } else if (x.equals("Y")) {
-            playSound(yId);
+            try {
+                Thread.sleep(100);
+                playSound(yId);
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+
+            }
             (new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -203,7 +215,13 @@ public class SimonActivity extends Activity implements View.OnClickListener {
             })
             ).start();
         } else if (x.equals("G")) {
-            playSound(gId);
+            try {
+                Thread.sleep(100);
+                playSound(gId);
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+
+            }
             (new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -233,7 +251,13 @@ public class SimonActivity extends Activity implements View.OnClickListener {
             })
             ).start();
         } else if (x.equals("B")) {
-            playSound(bId);
+            try {
+                Thread.sleep(100);
+                playSound(bId);
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+
+            }
             (new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -272,7 +296,13 @@ public class SimonActivity extends Activity implements View.OnClickListener {
         final ImageButton ibG = (ImageButton) findViewById(R.id.green_button);
         final ImageButton ibB = (ImageButton) findViewById(R.id.blue_button);
         if (x.equals("R")) {
-            playSound(yId);
+            try {
+                Thread.sleep(100);
+                playSound(yId);
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+
+            }
             (new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -302,7 +332,13 @@ public class SimonActivity extends Activity implements View.OnClickListener {
             })
             ).start();
         } else if (x.equals("Y")) {
-            playSound(yId);
+            try {
+                Thread.sleep(100);
+                playSound(yId);
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+
+            }
             (new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -332,7 +368,13 @@ public class SimonActivity extends Activity implements View.OnClickListener {
             })
             ).start();
         } else if (x.equals("G")) {
-            playSound(yId);
+            try {
+                Thread.sleep(100);
+                playSound(yId);
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+
+            }
             (new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -362,7 +404,13 @@ public class SimonActivity extends Activity implements View.OnClickListener {
             })
             ).start();
         } else if (x.equals("B")) {
-            playSound(yId);
+            try {
+                Thread.sleep(100);
+                playSound(yId);
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+
+            }
             (new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -395,18 +443,38 @@ public class SimonActivity extends Activity implements View.OnClickListener {
     }
 
     public void onSelect3(String x, final View view) throws InterruptedException {
-        final ImageButton ibR = (ImageButton) findViewById(R.id.red_button);
-        final ImageButton ibY = (ImageButton) findViewById(R.id.yellow_button);
-        final ImageButton ibG = (ImageButton) findViewById(R.id.green_button);
-        final ImageButton ibB = (ImageButton) findViewById(R.id.blue_button);
         if (x.equals("R")) {
-            playSound(rId);
+            try {
+                Thread.sleep(100);
+                playSound(rId);
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+
+            }
         } else if (x.equals("Y")) {
-            playSound(yId);
+            try {
+                Thread.sleep(100);
+                playSound(yId);
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+
+            }
         } else if (x.equals("G")) {
-            playSound(gId);
+            try {
+                Thread.sleep(100);
+                playSound(gId);
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+
+            }
         } else if (x.equals("B")) {
-            playSound(bId);
+            try {
+                Thread.sleep(100);
+                playSound(bId);
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+
+            }
         }
     }
 
