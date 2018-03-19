@@ -46,7 +46,7 @@ public class SimonActivity extends Activity implements View.OnClickListener {
     private int mode = 1;
     private int position = 0;
     private int maxPosition = 0;
-    private int maxSeq = 2;
+    private int maxSeq = 20;
     private String[] compSeq = new String[maxSeq];
     //private String[] playerSeq=new String[maxSeq];
     private RadioGroup radioGroup;
