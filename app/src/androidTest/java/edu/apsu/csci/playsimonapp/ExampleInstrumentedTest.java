@@ -1,4 +1,4 @@
-package edu.apsu.cwalker61.play_simon;
+package edu.apsu.csci.playsimonapp;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -19,8 +19,8 @@ public class ExampleInstrumentedTest {
     @Test
     public void useAppContext() throws Exception {
         // Context of the app under test.
-        Context appContext=InstrumentationRegistry.getTargetContext();
+        Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("edu.apsu.cwalker61.play_simon", appContext.getPackageName());
+        assertEquals("edu.apsu.csci.playsimonapp", appContext.getPackageName());
     }
 }

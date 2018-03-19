@@ -1,4 +1,4 @@
-package edu.apsu.cwalker61.play_simon;
+package edu.apsu.csci.playsimonapp;
 
 import org.junit.Test;
 
